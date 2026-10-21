@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portfolio</title>
+<style>
+:root {
+  --site-primary: #6558d3;
+  --site-secondary: #e9e6ff;
+  --site-background: #f7f7fc;
+  --site-on-primary: #ffffff;
+  --site-on-secondary: #28214f;
+  --site-on-background: #22223a;
+  --site-font-body: Inter, "Segoe UI", Arial, sans-serif;
+  --site-font-heading: Inter, "Segoe UI", Arial, sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--site-font-body); color: var(--site-on-background); background: var(--site-background); }
+#app { min-height: 100vh; width: 100%; border-radius: 0; background-color: light-dark(var(--site-background), #171725); color: light-dark(var(--site-on-background), #f5f4ff); }
+nav { display: flex; justify-content: space-between; align-items: center; max-width: 1080px; margin: auto; padding: calc(22px * var(--site-spacing-scale)) 24px; }
+.brand { font-weight: 800; font-size: 1.25rem; color: var(--site-primary); letter-spacing: -.5px; }
+nav a { text-decoration: none; color: inherit; margin-left: 22px; font-size: .94rem; }
+nav a:hover { color: var(--site-primary); }
+.hero { max-width: 1080px; margin: auto; padding: 78px 24px 88px; display: grid; grid-template-columns: 1.3fr .7fr; align-items: center; gap: 40px; }
+.eyebrow { color: var(--site-primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 800; font-size: .78rem; }
+h1 { font-family: var(--site-font-heading); font-size: calc(clamp(2.6rem, 6vw, 4.6rem) * var(--site-heading-scale)); line-height: 1.04; letter-spacing: -2.5px; margin: 18px 0; }
+h1 span { color: var(--site-primary); }
+.hero p { color: light-dark(#62627b, #c5c3db); line-height: 1.8; max-width: 540px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn { display: inline-block; padding: 13px 20px; border-radius: calc(12px * var(--site-radius-scale)); text-decoration: none; font-weight: 700; border: 1px solid var(--site-primary); }
+.btn.primary { background: var(--site-primary); color: var(--site-on-primary); }
+.btn.secondary { color: var(--site-primary); }
+.profile-art { justify-self: center; display: grid; place-items: center; width: min(280px, 70vw); aspect-ratio: 1; border-radius: 38% 62% 55% 45% / 45% 42% 58% 55%; background: var(--site-secondary); position: relative; }
+.avatar { width: 70%; height: 70%; display: grid; place-items: center; border-radius: 50%; background: var(--site-primary); color: white; font-size: 5rem; font-weight: 800; box-shadow: 0 20px 50px #6558d344; }
+main section { padding: 70px 24px; }
+section:nth-child(even) { background: light-dark(#ffffff, #1d1d2d); }
+.inner { max-width: 1000px; margin: auto; }
+.section-heading { margin: 0 0 12px; font-size: calc(2rem * var(--site-heading-scale)); letter-spacing: -1px; }
+.subtitle { color: light-dark(#686880, #c5c3db); margin: 0 0 30px; line-height: 1.7; }
+.about-text { max-width: 760px; line-height: 1.85; color: light-dark(#55556e, #d0cee0); }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.card { background: light-dark(#ffffff, #26263a); border: 1px solid light-dark(#e9e8f3, #3a3952); border-radius: calc(18px * var(--site-radius-scale)); padding: 24px; }
+.card .emoji { font-size: 1.8rem; }
+.card h3 { margin: 13px 0 8px; }
+.card p { color: light-dark(#686880, #c5c3db); line-height: 1.65; font-size: .94rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.tag { padding: 10px 14px; border-radius: 999px; background: var(--site-secondary); color: var(--site-on-secondary); font-size: .9rem; font-weight: 700; }
+.project-link { color: var(--site-primary); font-weight: 700; text-decoration: none; }
+.contact-box { background: var(--site-primary); color: var(--site-on-primary); border-radius: calc(22px * var(--site-radius-scale)); padding: 36px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.contact-box p { opacity: .9; line-height: 1.6; }
+.contact-box a { background: white; color: #3c327e; white-space: nowrap; }
+footer { text-align: center; padding: 25px; color: light-dark(#73738a, #c5c3db); font-size: .9rem; }
+@media (max-width: 700px) {
+ nav { padding: 18px; } nav .links { display: none; }
+ .hero { grid-template-columns: 1fr; padding-top: 50px; text-align: center; }
+ .hero p { margin-left: auto; margin-right: auto; }
+ .actions { justify-content: center; } .profile-art { grid-row: 1; width: 190px; }
+ .cards { grid-template-columns: 1fr; } main section { padding: 52px 20px; }
+ .contact-box { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <nav>
+    <div class="brand">MyPortfolio<span>.</span></div>
+    <div class="links"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a></div>
+  </nav>
+  <header class="hero">
+    <div>
+      <div class="eyebrow">Student • Learner • Creator</div>
+      <h1>Hello, I'm <span>Alex!</span><br>Future Developer.</h1>
+      <p>I'm a student who enjoys learning technology, solving problems, and turning ideas into simple, useful websites.</p>
+      <div class="actions">
+        <a class="btn primary" href="#projects">Explore my work ↗</a>
+        <a class="btn secondary" href="#contact">Contact me</a>
+      </div>
+    </div>
+    <div class="profile-art" aria-label="Profile illustration"><div class="avatar">A</div></div>
+  </header>
+  <main>
+    <section id="about">
+      <div class="inner">
+        <h2 class="section-heading">About me</h2>
+        <p class="subtitle">A little introduction</p>
+        <p class="about-text">I'm currently pursuing my degree and building my skills in programming and web development. I like creating projects that help me learn by doing. My goal is to become a developer who makes technology easy and useful for everyone.</p>
+      </div>
+    </section>
+    <section id="skills">
+      <div class="inner">
+        <h2 class="section-heading">My skills</h2>
+        <p class="subtitle">Tools and technologies I'm learning</p>
+        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">Java</span><span class="tag">SQL</span><span class="tag">Git & GitHub</span></div>
+      </div>
+    </section>
+    <section id="projects">
+      <div class="inner">
+        <h2 class="section-heading">Featured projects</h2>
+        <p class="subtitle">A few things I've been working on</p>
+        <div class="cards">
+          <article class="card"><div class="emoji">🌐</div><h3>Personal Portfolio</h3><p>A responsive website to introduce myself, share my skills, and showcase my work.</p><a class="project-link" href="#contact">View project details ↗</a></article>
+          <article class="card"><div class="emoji">🎓</div><h3>Student Task Planner</h3><p>A simple task organizer concept to keep track of assignments, deadlines, and study goals.</p><a class="project-link" href="#contact">View project details ↗</a></article>
+          <article class="card"><div class="emoji">💡</div><h3>Mini Python Project</h3><p>A beginner-friendly program built to practice logic, functions, and problem-solving.</p><a class="project-link" href="#contact">View project details ↗</a></article>
+        </div>
+      </div>
+    </section>
+    <section id="contact">
+      <div class="inner contact-box">
+        <div><h2 class="section-heading">Let's connect!</h2><p>Have a project idea or want to work together? I'd love to hear from you.</p></div>
+        <a class="btn" href="mailto:alex.student@example.com">Send me an email ↗</a>
+      </div>
+    </section>
+  </main>
+  <footer>© <span id="year"></span> Alex Student · Made with curiosity and code.</footer>
+</div>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener("click", event => {
+    const target = document.querySelector(link.getAttribute("href"));
+    if (target) {
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
+</script>
+</body>
+</html>
